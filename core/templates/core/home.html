@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+{% block title %}Flick - Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron p-5 bg-light rounded">
+    <h1 class="display-4">Welcome to Flick!</h1>
+    <p class="lead">The premier PlayStation rental service.</p>
+    <hr class="my-4">
+    <p>Rent PlayStation consoles and accessories for your gaming needs. Register as a member to get started.</p>
+    <div class="mt-4">
+        <a href="/member/register/" class="btn btn-primary btn-lg me-2">Register as Member</a>
+        <a href="/admin/login/" class="btn btn-secondary btn-lg">Admin Login</a>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">PlayStation 5</h5>
+                <p class="card-text">Experience next-gen gaming with our PS5 rental stations.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">PlayStation 4</h5>
+                <p class="card-text">Enjoy a wide library of PS4 games at our rental stations.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Netflix & Chill</h5>
+                <p class="card-text">Relax with our entertainment stations featuring Netflix.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

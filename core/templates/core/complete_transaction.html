@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+
+{% block title %}Complete Transaction - Flick{% endblock %}
+
+{% block content %}
+<div class="card mx-auto mt-5" style="max-width: 600px;">
+    <div class="card-header {% if transaction.is_loss %}bg-warning text-dark{% else %}bg-success text-white{% endif %}">
+        <h2 class="card-title">Complete Transaction</h2>
+    </div>
+    <div class="card-body">
+        {% if messages %}
+        <div class="messages mb-4">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="mb-4">
+            <h5>Transaction Details:</h5>
+            <p><strong>Member:</strong> {{ transaction.member.name }}</p>
+            <p><strong>Station:</strong> {{ transaction.station.name }} ({{ transaction.station.station_type.name }})</p>
+            <p><strong>Started:</strong> {{ transaction.clock_in|date:"F j, Y, g:i a" }}</p>
+            <p><strong>Duration:</strong> {{ transaction.duration }} minutes</p>
+            <p><strong>Amount:</strong> ${{ transaction.amount }}</p>
+            
+            {% if transaction.is_loss %}
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <strong>Loss Transaction!</strong> Clicking the button below will open the payment form.
+            </div>
+            {% endif %}
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'core:active_stations' %}" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn {% if transaction.is_loss %}btn-warning{% else %}btn-success{% endif %}">
+                    {% if transaction.is_loss %}
+                    <i class="bi bi-cash-coin me-1"></i> Proceed to Payment
+                    {% else %}
+                    <i class="bi bi-check-circle me-1"></i> Complete Transaction
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 
